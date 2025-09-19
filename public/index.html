@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo AI Assistant</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Todo AI Assistant</h1>
+
+    <div class="assistant-section">
+      <h2>AI Assistant</h2>
+      <div class="assistant-input">
+        <input type="text" id="assistant-prompt" placeholder="Ask me to help with your tasks..." />
+        <button id="assistant-btn"><i class="fas fa-robot"></i> Ask Assistant</button>
+      </div>
+      <div id="suggestions" class="suggestions-container"></div>
+    </div>
+
+    <form id="todo-form">
+      <input type="hidden" id="todo-id" />
+      <div class="row">
+        <label>Title</label>
+        <input id="title" type="text" placeholder="Enter todo title" required />
+      </div>
+      <div class="row">
+        <label>Description</label>
+        <textarea id="description" placeholder="Enter description"></textarea>
+      </div>
+      <div class="row">
+        <label>Priority</label>
+        <select id="priority">
+          <option value="low">Low</option>
+          <option value="medium" selected>Medium</option>
+          <option value="high">High</option>
+        </select>
+      </div>
+      <div class="row">
+        <label>Due Date</label>
+        <input id="due-date" type="date" />
+      </div>
+      <div class="row">
+        <label>Start Time</label>
+        <input id="start-time" type="time" />
+      </div>
+      <div class="row">
+        <label>End Time</label>
+        <input id="end-time" type="time" />
+      </div>
+      <div class="actions">
+        <button type="submit" id="submit-btn">Add Todo</button>
+        <button type="button" id="cancel-edit" class="secondary" hidden>Cancel</button>
+      </div>
+    </form>
+
+    <div class="filters">
+      <button id="filter-all" class="filter-btn active">All</button>
+      <button id="filter-active" class="filter-btn">Active</button>
+      <button id="filter-completed" class="filter-btn">Completed</button>
+    </div>
+
+    <h2>My Todos</h2>
+    <div id="todos-container" class="todos-container"></div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
+
+

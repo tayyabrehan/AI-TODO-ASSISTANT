@@ -1,0 +1,112 @@
+* { box-sizing: border-box; }
+
+/* Source indicator styles */
+.source-indicator {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.ai-source {
+  background-color: rgba(100, 149, 237, 0.15);
+  color: #4169e1;
+  border-left: 3px solid #4169e1;
+}
+
+.local-source {
+  background-color: rgba(144, 238, 144, 0.15);
+  color: #2e8b57;
+  border-left: 3px solid #2e8b57;
+}
+
+.source-icon {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.suggestions-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
+}
+body { font-family: system-ui, Arial, sans-serif; margin: 0; background: #0f172a; color: #e2e8f0; }
+.container { max-width: 900px; margin: 40px auto; padding: 20px; background: #111827; border: 1px solid #1f2937; border-radius: 10px; }
+h1, h2 { margin-top: 0; }
+
+/* Form Styles */
+form { margin-bottom: 24px; padding: 20px; background: #0b1220; border: 1px solid #1f2937; border-radius: 8px; }
+.row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 16px; }
+label { width: 100px; color: #93c5fd; padding-top: 10px; }
+input, select, textarea { flex: 1; padding: 12px; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: #e2e8f0; font-size: 14px; }
+textarea { min-height: 80px; resize: vertical; }
+.actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+button { padding: 10px 16px; border: none; border-radius: 6px; background: #2563eb; color: #fff; cursor: pointer; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+button.secondary { background: #475569; }
+button:hover { opacity: 0.9; transform: translateY(-1px); }
+button:active { transform: translateY(0); }
+button i { font-size: 14px; }
+button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* AI Assistant Section */
+.assistant-section { margin-bottom: 30px; padding: 20px; background: #172554; border-radius: 8px; border: 1px solid #1e40af; }
+.assistant-input { display: flex; gap: 10px; margin-bottom: 15px; }
+.assistant-input input { flex: 1; }
+#assistant-btn { background: #6366f1; }
+
+.suggestions-container { display: flex; flex-direction: column; gap: 10px; }
+.suggestion-item { background: #1e3a8a; padding: 15px; border-radius: 6px; border-left: 4px solid #3b82f6; }
+.suggestion-item h4 { margin-top: 0; margin-bottom: 8px; color: #93c5fd; }
+.suggestion-item p { margin: 0 0 12px 0; font-size: 14px; }
+.suggestion-meta { display: flex; margin-bottom: 12px; }
+.priority-tag { font-size: 12px; padding: 3px 8px; border-radius: 12px; }
+.priority-low { background: #064e3b; color: #6ee7b7; }
+.priority-medium { background: #854d0e; color: #fcd34d; }
+.priority-high { background: #7f1d1d; color: #fca5a5; }
+.use-suggestion-btn { font-size: 13px; padding: 6px 12px; background: #3b82f6; }
+
+/* Todo Items */
+.filters { display: flex; gap: 10px; margin-bottom: 20px; }
+.filter-btn { background: #1f2937; color: #e2e8f0; padding: 8px 16px; border-radius: 20px; font-size: 14px; }
+.filter-btn.active { background: #3b82f6; color: white; }
+
+.todos-container { display: flex; flex-direction: column; gap: 15px; }
+.todo-item { background: #1e293b; border-radius: 8px; overflow: hidden; border-left: 4px solid #3b82f6; }
+.todo-item.priority-low { border-left-color: #10b981; }
+.todo-item.priority-medium { border-left-color: #f59e0b; }
+.todo-item.priority-high { border-left-color: #ef4444; }
+.todo-item.completed { opacity: 0.7; }
+.todo-item.completed .todo-title { text-decoration: line-through; }
+
+.todo-header { display: flex; align-items: center; padding: 15px; background: #0f172a; gap: 10px; }
+.todo-checkbox { display: flex; align-items: center; }
+.todo-checkbox input { width: 18px; height: 18px; cursor: pointer; }
+.todo-title { margin: 0; flex: 1; font-size: 16px; }
+.todo-priority { font-size: 12px; padding: 3px 8px; border-radius: 12px; text-transform: capitalize; }
+.priority-low { background: #064e3b; color: #6ee7b7; }
+.priority-medium { background: #854d0e; color: #fcd34d; }
+.priority-high { background: #7f1d1d; color: #fca5a5; }
+
+.todo-body { padding: 15px; }
+.todo-description { margin: 0 0 15px 0; font-size: 14px; color: #cbd5e1; }
+.todo-meta { display: flex; justify-content: space-between; font-size: 12px; color: #94a3b8; }
+
+.todo-actions { display: flex; padding: 10px 15px; background: #0f172a; gap: 10px; justify-content: flex-end; }
+.edit-btn, .delete-btn { padding: 6px; border-radius: 4px; }
+.edit-btn { background: #1d4ed8; }
+.delete-btn { background: #b91c1c; }
+
+/* Empty States */
+.empty-state { text-align: center; padding: 30px; color: #94a3b8; font-style: italic; }
+
+/* Notifications */
+.notification { position: fixed; bottom: 20px; right: 20px; padding: 12px 20px; border-radius: 6px; background: #1e293b; color: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 1000; max-width: 300px; }
+.notification.success { background: #065f46; border-left: 4px solid #10b981; }
+.notification.error { background: #991b1b; border-left: 4px solid #ef4444; }
+.notification.info { background: #1e40af; border-left: 4px solid #3b82f6; }
+.fade-out { opacity: 0; transition: opacity 0.5s ease-out; }
+
+
