@@ -1,6 +1,6 @@
-# HTML/CSS Frontend + Node.js + MongoDB Web App
+# Todo AI Assistant - Node.js + MongoDB Web App
 
-A simple web application with a static HTML/CSS/JS frontend and Node.js backend connected to MongoDB. This app provides a user management system with full CRUD operations.
+A modern todo application with a static HTML/CSS/JS frontend and Node.js backend connected to MongoDB. This app provides a smart todo management system with AI-powered task suggestions using Groq AI.
 
 ## Features
 
@@ -8,17 +8,24 @@ A simple web application with a static HTML/CSS/JS frontend and Node.js backend 
 - **Backend**: Node.js with Express.js
 - **Database**: MongoDB for data storage
 - **API**: RESTful API endpoints for all operations
-- **CRUD Operations**: Create, Read, Update, Delete users
-- **Dashboard**: Overview with metrics and recent users
-- **Search**: Search functionality for users
+- **CRUD Operations**: Create, Read, Update, Delete todos
+- **AI Assistant**: Generate todo suggestions using Groq AI
+- **Priority Levels**: Low, Medium, High priority settings for tasks
+- **Due Dates & Times**: Schedule tasks with due dates, start and end times
+- **Filtering**: Filter todos by All, Active, or Completed status
 - **Responsive**: Clean and modern interface
 
 ## Project Structure
 
 ```
 ├── public/             # Static frontend (HTML/CSS/JS)
+│   ├── index.html      # Main HTML file
+│   ├── styles.css      # CSS styles
+│   └── app.js          # Frontend JavaScript
 ├── server.js           # Node.js backend server
 ├── config.js           # Configuration file
+├── .env                # Environment variables (not tracked in git)
+├── .gitignore          # Git ignore file
 ├── package.json        # Node.js dependencies
 └── README.md           # This file
 ```
@@ -28,96 +35,89 @@ A simple web application with a static HTML/CSS/JS frontend and Node.js backend 
 Before running this application, make sure you have the following installed:
 
 1. **Node.js** (version 14 or higher)
-3. **MongoDB** (local installation or MongoDB Atlas)
+2. **MongoDB** (local installation or MongoDB Atlas account)
+3. **Groq API Key** (optional, for AI assistant functionality)
 
-## Installation & Setup
+## Installation
 
-### 1. Clone or Download the Project
-
-Make sure all files are in the same directory.
-
-### 2. Install Node.js Dependencies
+1. Clone this repository or download the source code
+2. Navigate to the project directory
+3. Install dependencies:
 
 ```bash
 npm install
 ```
 
-### 3. Set up MongoDB
+4. Create a `.env` file in the root directory with the following variables:
 
-#### Option A: Local MongoDB
-1. Install MongoDB locally
-2. Start MongoDB service:
-   ```bash
-   mongod
-   ```
+```
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+GROQ_API_KEY=your_groq_api_key
+GROQ_MODEL=llama-3.3-70b-versatile
+```
 
-#### Option B: MongoDB Atlas (Cloud)
-1. Create a free account at [MongoDB Atlas](https://www.mongodb.com/atlas)
-2. Create a new cluster
-3. Get your connection string
-4. Update the `MONGODB_URI` in `config.js` with your Atlas connection string (or set environment variables)
-
-### 4. Configure the Application
-
-The application uses the following default configuration:
-- **Backend Port**: 5000
-- **MongoDB URI**: mongodb://localhost:27017/user-app
-
-To change these settings, modify the `config.js` file or set environment variables.
+> Note: If you don't have a Groq API key, the application will fall back to local suggestions.
 
 ## Running the Application
 
-### 1. Start the Backend Server
-
-Open a terminal/command prompt and run:
+1. Start the server:
 
 ```bash
 npm start
 ```
 
-Or for development with auto-restart:
+2. For development with auto-restart:
 
 ```bash
 npm run dev
 ```
 
-You should see:
-```
-Server is running on port 5000
-Connected to MongoDB
-API endpoints available at http://localhost:5000/api
-```
-
-### 2. Open the Frontend
-
-Open your browser and go to `http://localhost:5000`.
-
-## API Endpoints
-
-The backend provides the following REST API endpoints:
-
-- `GET /api/health` - Health check
-- `GET /api/users` - Get all users
-- `GET /api/users/:id` - Get user by ID
-- `POST /api/users` - Create new user
-- `PUT /api/users/:id` - Update user
-- `DELETE /api/users/:id` - Delete user
+3. Open your browser and navigate to `http://localhost:5000`
 
 ## Usage
 
-### Add User
-- Fill in user details (name, email, age)
-- Submit to create a new user
-- Validation ensures all fields are filled
+### Todo Management
 
-### View Users
-- See all users in a table
+- **Create Todo**: Fill out the form and click "Add Todo"
+- **Edit Todo**: Click the edit icon on any todo item
+- **Delete Todo**: Click the delete icon on any todo item
+- **Mark as Complete**: Click the checkbox on any todo item
+- **Filter Todos**: Use the filter buttons to view All, Active, or Completed todos
 
-### Update User
-- Click Edit, modify fields and save
+### AI Assistant
 
-### Delete User
-- Click Delete on a user row and confirm
+1. Type a request in the AI Assistant input field (e.g., "Create a shopping list for dinner")
+2. Click "Ask Assistant"
+3. The AI will generate todo suggestions
+4. Click "Add" on any suggestion to add it to your todo list
+
+
+## API Documentation
+
+### Todo Endpoints
+
+- `GET /api/todos` - Get all todos
+- `GET /api/todos/:id` - Get a specific todo by ID
+- `POST /api/todos` - Create a new todo
+- `PUT /api/todos/:id` - Update a todo
+- `DELETE /api/todos/:id` - Delete a todo
+
+### AI Assistant Endpoints
+
+- `POST /api/assistant/suggest` - Generate todo suggestions based on a prompt
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License.
 
 ## Troubleshooting
 
@@ -125,16 +125,20 @@ The backend provides the following REST API endpoints:
 
 1. **MongoDB Connection Error**
    - Ensure MongoDB is running
-   - Check the connection string in `config.js`
+   - Check the connection string in your `.env` file
    - Verify MongoDB is accessible on the specified port
 
 2. **Port Already in Use**
-   - Change the port in `config.js`
+   - Change the port in your `.env` file
    - Kill any process using port 5000
 
 3. **Module Not Found**
    - Run `npm install` to install dependencies
    - Check that all required packages are installed
+
+4. **Groq API Issues**
+   - Verify your Groq API key is correct in the `.env` file
+   - Check that the selected model is available in your Groq account
 
 ### Frontend Issues
 
@@ -142,32 +146,12 @@ The backend provides the following REST API endpoints:
    - Ensure the Node.js server is running
    - Verify the backend is accessible at `http://localhost:5000`
 
-## Development
-
-### Adding New Features
-
-1. **Backend**: Add new routes in `server.js`
-2. **Frontend**: Update `public/` files
-3. **Database**: Modify the schema in `server.js` if needed
-
-### Environment Variables
-
-You can use environment variables to configure the application:
-
-```bash
-export PORT=5000
-export MONGODB_URI=mongodb://localhost:27017/user-app
-```
-
 ## Technologies Used
 
 - **Frontend**: HTML, CSS, JavaScript
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB, Mongoose
-
-## License
-
-MIT License - feel free to use this project for learning and development purposes.
+- **AI Integration**: Groq API
 
 ## Support
 
